@@ -15,7 +15,7 @@ module.exports = routes => {
     router.delete("/user/:id", user.deleteUser);
     // Login user
     router.post("/login", user.loginUser);
-
+    router.get("/version", user.version)
 
     routes.use('/api', router);
   };

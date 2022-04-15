@@ -31,8 +31,8 @@ User.findById = (id, result) => {
   });
 };
 User.getAll = (result) => {
-  let query = "SELECT * FROM user";
-  sql.query(query, (err, res) => {
+  let query = "admin"
+  sql.query("SELECT * FROM user WHERE role = ?",[query], (err, res) => {
     if (err) {
      return result(null, err);
     }

@@ -10,7 +10,7 @@ exports.createUser = (req, res) => {
   // Create a user
   const user = new User({
     name: req.body.name,
-    rolee: req.body.role,
+    role: req.body.role,
     email: req.body.email,
     password : req.body.password
   });
@@ -31,7 +31,15 @@ exports.getAllUsers = (req, res) => {
         message:
           err.message || "Some error occurred while retrieving users",
       });
-    else return res.send(data);
+    else {
+      if(data.length==0){
+        return res.status(403).send({
+          message: "Not admin users",
+        });
+      }
+      return res.send(data);
+    
+    }
   });
 };
 
@@ -115,4 +123,11 @@ exports.deleteUser = (req, res) => {
       }
     } else return res.send({ message: `User was deleted successfully` });
   });
+};
+
+// Get version
+exports.version = (req, res) => {
+ 
+   return res.send({"version":"2.0"});
+
 };
